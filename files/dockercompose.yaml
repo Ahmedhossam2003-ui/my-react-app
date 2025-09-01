@@ -1,0 +1,29 @@
+services:
+  web:
+    build: .
+    ports:
+      - "5000:80"
+    volumes:
+      - db_data:/app
+    networks:
+      -  mynet
+  redis:
+    image: "redis:alpine"
+    networks:
+      - mynet
+  db:
+    image: "postgres:alpine"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    networks:
+      - mynet
+volumes:
+  db_data: 
+
+networks:
+  mynet:
+    external: true
