@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('تثبيت المكتبات') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        
+        stage('بناء') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+    }
+}
